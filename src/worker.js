@@ -1,6 +1,7 @@
-self.onmessage = fucntion(event){
-  let list = event.data;
-  self.postMessage(bubble_Sort(list));
+self.onmessage = function (event) {
+  console.log(event);
+  let list = event.data.list;
+  self.postMessage({ data: bubble_Sort(list) });
 }
 
 function swap(arr, first_Index, second_Index) {
