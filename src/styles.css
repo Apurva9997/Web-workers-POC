@@ -1,0 +1,115 @@
+/* comment me */
+/* body{
+  counter-reset: unsorted-list-counter;
+  counter-reset: sorted-list-counter;
+} */
+
+input, select {
+  width: 300px;
+  /* height: 40px; */
+  outline: none;
+  border: 1px solid #23c3b4;
+  border-radius: 3px;
+  font-size: 18px;
+  padding: 5px;
+}
+.input-range-container{
+  margin-left: 20px;
+  margin-top: 10px;
+  position: relative;
+  width: fit-content;
+}
+input, select{
+  margin-left: 20px;
+}
+select{
+  margin-top:10px;
+}
+
+input[type="range"]::before{
+  content: "1";
+  position: absolute;
+  left: 0px;
+  top: 4px;
+}
+input[type="range"]::after{
+  content: "10";
+  position: absolute;
+  right: -25px;
+  top: 4px;
+}
+.list-items-container{
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  /* align-items: center; */
+  justify-items: center;
+}
+.list-items-container>div{
+  width: 100%;
+}
+.unsorted-list{
+  border-right: 2px solid grey;
+}
+ul{
+  text-align: center;
+  list-style-type: none;
+}
+li{
+  border-bottom: 1px solid grey;
+  width: fit-content;
+  padding-top: 5px;
+}
+/* comment me */
+/* .unsorted-list ul > li{
+  counter-increment: unsorted-list-counter;
+} */
+.sorted-list ul > li{
+  counter-increment: sorted-list-counter;
+}
+/* comment me */
+/* .unsorted-list ul > li::before{
+  content: counter(unsorted-list-counter) ". ";
+} */
+.sorted-list ul > li::before{
+  content: counter(sorted-list-counter) ". ";
+}
+h3{
+  text-align: center;
+}
+
+button {
+  opacity: .5;
+  padding: 5px;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+button:hover{
+  outline: none;
+  /* position: absolute;
+  top: 3px;
+  left: 2px; */
+  transform: scale(1.2);
+}
+#action-items-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  padding-top: 30px;
+}
+.button-container{
+  position: relative;
+}
+#without-worker-api{
+  background-color: deeppink;
+  color: white;
+}
+
+#with-worker-api{
+  background-color: green;
+  color: white;
+}
