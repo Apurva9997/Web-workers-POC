@@ -1,0 +1,13 @@
+[build]
+  publish = "src"
+  command = "npm run build"
+
+[dev]
+  command = "npm start"
+  publish = "src"
+  port = 8888
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200 

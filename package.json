@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "serve src/"
+    "start": "serve src/",
+    "build": "echo 'No build step required'",
+    "dev": "serve src/"
   },
   "repository": {
     "type": "git",
