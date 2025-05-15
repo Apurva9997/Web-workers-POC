@@ -1,8 +1,19 @@
-if ('Worker' in window) {
-  alert("Voila workers are supported");
-}
-else {
-  alert("Uhh Wokers aren't supprted by your browser yet :(")
+// Check for Web Worker support and update UI accordingly
+const workerSupportStatus = document.getElementById("worker-support-status");
+const webWorkerButton = document.getElementById("with-worker-api");
+
+if ("Worker" in window) {
+  workerSupportStatus.textContent =
+    "✓ Web Workers are supported in your browser";
+  workerSupportStatus.classList.add("success");
+} else {
+  workerSupportStatus.textContent =
+    "✗ Web Workers are not supported in your browser";
+  workerSupportStatus.classList.add("error");
+  webWorkerButton.disabled = true;
+  webWorkerButton.title = "Web Workers are not supported in your browser";
+  webWorkerButton.style.opacity = "0.3";
+  webWorkerButton.style.cursor = "not-allowed";
 }
 
 function swap(arr, first_Index, second_Index) {
@@ -12,9 +23,10 @@ function swap(arr, first_Index, second_Index) {
 }
 
 function bubble_Sort(arr) {
-
   var len = arr.length,
-    i, j, stop;
+    i,
+    j,
+    stop;
 
   for (i = 0; i < len; i++) {
     for (j = 0, stop = len - i; j < stop; j++) {
@@ -41,17 +53,17 @@ function sortList() {
   for (let i = 0; i < ITERATIONS; i++) {
     if (sortedListContainer.childElementCount === 2) {
       sortedListContainer.removeChild(ol);
-      sortedListContainer.appendChild(document.createElement('ul'));
+      sortedListContainer.appendChild(document.createElement("ul"));
       ol = document.querySelector(".sorted-list ul");
     }
     let sorted_array = bubble_Sort(list);
     if (i === ITERATIONS - 1) {
       console.log("current iteration ", i);
       sorted_array.forEach(function (item) {
-        let listItem = document.createElement('li');
+        let listItem = document.createElement("li");
         listItem.innerText = item;
         ol.appendChild(listItem);
-      })
+      });
     }
     PROGRESS++;
     progress(PROGRESS, ITERATIONS);
@@ -65,7 +77,7 @@ let sorted_array = [];
 function webWorkerProcess() {
   if (sortedListContainer.childElementCount === 2) {
     sortedListContainer.removeChild(ol);
-    sortedListContainer.appendChild(document.createElement('ul'));
+    sortedListContainer.appendChild(document.createElement("ul"));
     ol = document.querySelector(".sorted-list ul");
   }
   if (iterations_processed !== ITERATIONS) {
@@ -76,25 +88,25 @@ function webWorkerProcess() {
         console.log("got the sorted data from worker", event);
         sorted_array = event.data.data;
         resolve();
-      }
-    }).then((data) => {
-      ++iterations_processed;
-      PROGRESS++;
-      progress(PROGRESS, ITERATIONS);
-      webWorkerProcess();
+      };
     })
-      .catch((err) => console.log(err))
-  }
-  else {
+      .then((data) => {
+        ++iterations_processed;
+        PROGRESS++;
+        progress(PROGRESS, ITERATIONS);
+        webWorkerProcess();
+      })
+      .catch((err) => console.log(err));
+  } else {
     console.log("last iteration processed");
     iterations_processed = 0;
     PROGRESS = 0;
     sorted_array.forEach(function (item) {
-      let listItem = document.createElement('li');
+      let listItem = document.createElement("li");
       listItem.innerText = item;
       ol.appendChild(listItem);
-    })
-    return
+    });
+    return;
   }
   // worker.terminate();
 }
